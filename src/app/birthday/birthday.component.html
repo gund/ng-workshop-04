@@ -1,0 +1,13 @@
+<p *ngIf="isLoading$ | async; else errorTpl">
+  Loading birthday data for {{ name }}...
+</p>
+
+<ng-template #errorTpl>
+  <p *ngIf="error$ | async as error; else birthdayTpl">
+    Failed to load birthday data: {{ error }}
+  </p>
+</ng-template>
+
+<ng-template #birthdayTpl>
+  <p>{{ name }}'s birthday is on {{ birthday$ | async | date: 'shortDate' }}</p>
+</ng-template>
