@@ -15,7 +15,7 @@ export class BirthdayService {
       return throwError('Unable to find birthday for empty name!');
     }
 
-    // We fake a lookup here by generating random dates
+    // Fake API lookup by generating random dates
     return of(
       new Date(
         random(this.CURRENT_YEAR - 100, this.CURRENT_YEAR),
