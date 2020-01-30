@@ -1,13 +1,15 @@
-<p *ngIf="isLoading$ | async; else errorTpl">Loading all the people...</p>
+<p *ngIf="isLoading$ | async; else errorTpl" class="loading">
+  Loading all the people...
+</p>
 
 <ng-template #errorTpl>
-  <p *ngIf="error$ | async as error; else peopleTpl">
+  <p *ngIf="error$ | async as error; else peopleTpl" class="error">
     Failed to load all people: {{ error }}
   </p>
 </ng-template>
 
 <ng-template #peopleTpl>
-  <p>
+  <p class="title">
     People:
     <button (click)="refreshPeople()">Refresh</button>
   </p>

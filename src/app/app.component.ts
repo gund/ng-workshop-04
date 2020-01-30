@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { EMPTY, merge, Subject } from 'rxjs';
+import { EMPTY, merge, ReplaySubject, Subject } from 'rxjs';
 import {
   catchError,
   mapTo,
@@ -19,7 +19,7 @@ import { PeopleService } from './people/people.service';
 export class AppComponent {
   loadPeople$ = new Subject();
 
-  error$ = new Subject();
+  error$ = new ReplaySubject();
 
   fetchPeople$ = this.loadPeople$.pipe(startWith(null));
 
