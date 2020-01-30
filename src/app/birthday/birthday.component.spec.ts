@@ -7,7 +7,7 @@ describe('BirthdayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [BirthdayComponent],
-    });
+    }).compileComponents();
   });
 
   it('should ...', () => {
