@@ -1,5 +1,11 @@
 # NgWorkshop04Testing
 
+Implement unit tests for:
+- [BirthdayService](src/app/birthday/birthday.service.spec.ts)
+- [BirthdayComponent](src/app/birthday/birthday.component.spec.ts)
+
+---
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
 ## Development server
