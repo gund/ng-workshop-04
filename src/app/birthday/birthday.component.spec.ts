@@ -4,8 +4,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BirthdayComponent} from './birthday.component';
 import {Subject} from 'rxjs';
 import {BirthdayService} from './birthday.service';
-import {CUSTOM_ELEMENTS_SCHEMA, SimpleChange} from '@angular/core';
-import { By } from '@angular/platform-browser';
+import {SimpleChange} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 class BirthdayServiceMock {
     getAllSubject$ = new Subject();
@@ -16,8 +16,7 @@ describe('BirthdayComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [BirthdayComponent],
-            providers: [{ provide: BirthdayService, useClass: BirthdayServiceMock }],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [{provide: BirthdayService, useClass: BirthdayServiceMock}],
         }).compileComponents();
     });
 
