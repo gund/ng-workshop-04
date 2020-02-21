@@ -22,7 +22,7 @@ describe('Service: Birthday', () => {
         .getBirthdayFor('Dima')
         .subscribe(event =>  methodReturnedValue = event);
   
-      tick(5000); //is it needed?
+      tick(5000);
   
       expect(checkIfDateReturned(methodReturnedValue)).toBeFalsy();
     }));
