@@ -34,13 +34,11 @@ describe('BirthdayComponent', () => {
 
   it('should call `BirthdayService.getBirthdayFor()` initially', () => {
     fixture.detectChanges();
-
     expect(getBirthdayServiceMock().getBirthdayFor).toHaveBeenCalled();
   });
 
   it('should render loading text in `p.loading` initially', () => {
     fixture.detectChanges();
-
     const pElem = fixture.debugElement.query(By.css('p.loading'));
     expect(pElem.nativeElement.textContent).toMatch(
       `Loading birthday data for ${name}...`,
@@ -48,7 +46,6 @@ describe('BirthdayComponent', () => {
   });
 
   it('should render error in `p.error` when `BirthdayService.getBirthdayFor()` fails', () => {
-    fixture.detectChanges();
     getBirthdayServiceMock().getBirthdaySubject$.error('reason');
     fixture.detectChanges();
 
