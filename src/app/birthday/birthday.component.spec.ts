@@ -1,9 +1,9 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BirthdayComponent} from './birthday.component';
 import {BirthdayService} from './birthday.service';
-import {CUSTOM_ELEMENTS_SCHEMA, SimpleChange} from '@angular/core';
+import {SimpleChange} from '@angular/core';
 import {Subject} from 'rxjs';
 import {By} from '@angular/platform-browser';
 
@@ -17,12 +17,12 @@ describe('BirthdayComponent', () => {
     TestBed.configureTestingModule({
       declarations: [BirthdayComponent],
       providers: [{provide: BirthdayService, useClass: BirthServiceMock}],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 
   let fixture: ComponentFixture<BirthdayComponent>;
   const name = 'Anya';
+  const dateMock = '5/12/90';
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BirthdayComponent);
@@ -42,7 +42,6 @@ describe('BirthdayComponent', () => {
     fixture.detectChanges();
 
     const pElem = fixture.debugElement.query(By.css('p.loading'));
-
     expect(pElem.nativeElement.textContent).toMatch(
       `Loading birthday data for ${name}...`,
     );
@@ -50,35 +49,21 @@ describe('BirthdayComponent', () => {
 
   it('should render error in `p.error` when `BirthdayService.getBirthdayFor()` fails', () => {
     fixture.detectChanges();
-
     getBirthdayServiceMock().getBirthdaySubject$.error('reason');
-
     fixture.detectChanges();
 
     const pElem = fixture.debugElement.query(By.css('p.error'));
-
     expect(pElem.nativeElement.textContent).toMatch(
       'Failed to load birthday data: reason'
     );
   });
-  describe('when birthday loaded', () => {
-    const dateMock = new Date();
-    const transformedDateMock = dateMock.toLocaleDateString('en-US', {
-      year: '2-digit',
-      month: 'numeric',
-      day: 'numeric'
-    });
+  it('should render title with name and date in `p.title`', () => {
+    fixture.detectChanges();
+    getBirthdayServiceMock().getBirthdaySubject$.next(dateMock);
+    fixture.detectChanges();
 
-    beforeEach(() => {
-      fixture.detectChanges();
-      getBirthdayServiceMock().getBirthdaySubject$.next(dateMock);
-      fixture.detectChanges();
-    });
-
-    it('should render title with name and date in `p.title`', () => {
-      const pElem = fixture.debugElement.query(By.css('p.title'));
-      expect(pElem.nativeElement.textContent).toMatch(`${name}'s birthday is on ${transformedDateMock}`);
-    });
+    const pElem = fixture.debugElement.query(By.css('p.title'));
+    expect(pElem.nativeElement.textContent).toMatch(`${name}'s birthday is on ${dateMock}`);
   });
 });
 

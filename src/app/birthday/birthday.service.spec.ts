@@ -11,20 +11,26 @@ describe('Service: Birthday', () => {
   });
 
   describe('getBirthdayFor() method', () => {
+
     it('should return observable of mocked data', fakeAsync(() => {
       const callback = jasmine.createSpy();
+
       getService()
         .getBirthdayFor('Anya')
         .subscribe(callback);
+
       tick(5000);
       expect(callback).toHaveBeenCalledWith(jasmine.any(Date));
     }));
+
     it('should return error observable', fakeAsync(() => {
       const callback = jasmine.createSpy();
+
       getService()
         .getBirthdayFor('')
         .subscribe(() => {
         }, callback);
+
       tick(5000);
       expect(callback).toHaveBeenCalledWith('Unable to find birthday for empty name!');
     }));
